@@ -32,7 +32,7 @@ def scrap_musika_zuzenean():
             current_date = f"{year}/{month}/{day}"
 
         if 'event__card' in element.get('class', []):
-            artistas = lugar_info = poblacion = provincia = lugar = link = None
+            artistas = lugar_info = poblacion = provincia = lugar = link =imagen_url= None
 
             try:
                 artistas = element.find("div", class_="event__bands").get_text(strip=True)
@@ -56,6 +56,14 @@ def scrap_musika_zuzenean():
             except AttributeError:
                 pass
                         
+            try:
+                imagen_element = element.find("a", class_="event__image lazyload")
+                if imagen_element:
+                    imagen_url = imagen_element['data-bg-image']
+                    imagen_url=imagen_url[4:-1]
+            except AttributeError:
+                pass
+            
             hora, precio, detalles = None, None, None
             if link:
                 hora, precio, detalles = scrap_musika_zuzenean_details(link)            
@@ -66,11 +74,12 @@ def scrap_musika_zuzenean():
                 "lugar": lugar,
                 "provincia": provincia,
                 "poblacion": poblacion,
-                "tipo": "Musika",
+                "tipo": "Musikie",
                 "artistas": artistas,
                 "precio": precio,
                 "detalles": detalles,
                 "link": link,
+                "imagen":imagen_url,
                 "web": "Musikazuzenean"
             }
 
@@ -147,6 +156,7 @@ def scrap_prosineck():
             artistas = None
             link = None
             detalles = None
+            imagen_url=None
 
             # Extraer la hora y precio
             hora_precio_element = concierto.find("p", class_="hora_precio")
@@ -182,6 +192,14 @@ def scrap_prosineck():
                     artistas_list.append(artista.get_text(strip=True))
             artistas = ", ".join(artistas_list)
 
+            # Extraer la URL de la imagen
+            cartel_div = concierto.find("div", class_="cartel")
+            if cartel_div:
+                enlace_imagen = cartel_div.find("a", class_="colorbox")
+                if enlace_imagen:
+                    imagen_url = enlace_imagen['href'] 
+
+
             # Crear el diccionario del evento
             evento = {
                 "fecha": fecha_formateada,
@@ -189,15 +207,16 @@ def scrap_prosineck():
                 "lugar": lugar,
                 "provincia": provincia,
                 "poblacion": poblacion,
-                "tipo": "Musika",
+                "tipo": "Musikie",
                 "artistas": artistas,
                 "precio": precio,
                 "detalles": detalles,
                 "link": url,
+                "imagen":imagen_url,
                 "web": "Prosineck"
             }
 
             # Añadir el evento al JSON global
-            data_json.append(evento)                        
+            data_json.append(evento)  
 
     return data_json

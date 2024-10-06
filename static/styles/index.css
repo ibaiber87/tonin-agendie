@@ -37,6 +37,26 @@ h5 {
     top: 120px;        
 }
 
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center; /* Alinea verticalmente la imagen con el texto */
+}
+
+.justify-content-between {
+    justify-content: space-between; /* Distribuye el espacio entre el texto y la imagen */
+}
+
+.img-small {
+    width: 50px;
+    height: auto;
+    margin-left: 10px; 
+    margin-top: 40px;
+    border-radius: 25px;
+}
+
 #datepicker {
     width: 100%;
     margin-bottom: 20px;
@@ -98,6 +118,18 @@ h5 {
     padding: 15px;
 }
 
+.card-title{
+    margin-top:1em;
+}
+
+.card-image {
+    text-align: center;
+}
+
+#img_card{
+    width:100%;
+border-radius: 15px;
+}
 
 @media (max-width: 991.98px) {
     #bloque1 {

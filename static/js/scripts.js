@@ -4,23 +4,37 @@ $(document).ready(function () {
     function generar_cards(eventos) {
         const $bloque2 = $('#bloque2');
         $bloque2.empty(); // Vacía el bloque antes de agregar nuevas tarjetas        
-        eventos.forEach(function (evento) {            
+        eventos.forEach(function (evento) {
             const $card = $(`
                 <a href="${evento.link ? evento.link : '#'}" target="_blank" class="text-decoration-none">
                     <div class="card">
                         <div class="card-body">
+                            <!-- Lógica para determinar qué imagen mostrar según el tipo -->
+                            <div class="card-image">
+                                <img id="img_card" src=${evento.imagen} class="img-fluid">                                    
+                            </div>
+                            
                             <h5 class="card-title"><strong>${evento.artistas ? evento.artistas : "-"}</strong></h5>
-                            <p class="card-text">
-                                <strong>Lekua:</strong> ${evento.lugar}<br>
-                                <strong>Data:</strong> ${evento.fecha} - ${evento.hora ? evento.hora.substring(0, 5) : ""}<br>
-                                <strong>Herria:</strong> ${evento.poblacion ? evento.poblacion : "-"} ${evento.provincia ? '(' + evento.provincia + ')' : ""}<br>
-                                <strong>Mota:</strong> ${evento.tipo ? evento.tipo : "-"}<br>                            
-                            </p>
+                            <!-- Contenedor flex para alinear el texto y la imagen en la misma línea -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="card-text mb-0">
+                                    <strong>Lekua:</strong> ${evento.lugar}<br>
+                                    <strong>Data:</strong> ${evento.fecha} - ${evento.hora ? evento.hora.substring(0, 5) : ""}<br>
+                                    <strong>Herria:</strong> ${evento.poblacion ? evento.poblacion : "-"} ${evento.provincia ? '(' + evento.provincia + ')' : ""}<br>
+                                    <strong>Info:</strong> ${evento.web ? evento.web : "-"}<br>
+                                </p>
+                                <!-- Imagen pequeña alineada a la derecha, al par del texto -->
+                                <img src="${evento.tipo === 'Musikie' ? '/static/images/logo_musika.webp' : evento.tipo === 'Antzerkixe' ? '/static/images/logo_antzerki.webp' : evento.tipo === 'zinie' ? '/static/images/logo_cine.webp' : evento.tipo === 'Dantza' ? '/static/images/logo_dantza.webp' : ''}" 
+                                     class="img-small" alt="Evento">                     
+                            </div>
                         </div>
                     </div>
                 </a>
             `);
             
+            
+
+
 
             // Añadir la tarjeta al bloque 2
             $bloque2.append($card);
@@ -37,7 +51,7 @@ $(document).ready(function () {
                 // Vacía la tabla actual
                 const $eventosBody = $('#eventos-body');
                 $eventosBody.empty();
-                
+
                 // Generar filas en la tabla (bloque 1)
                 response.forEach(function (evento) {
                     const $row = $(`
@@ -74,7 +88,6 @@ $(document).ready(function () {
         });
     }
 
-    // Función para actualizar la base de datos
     function actualizar_bd() {
         //mjuestra la etiqueta actualizando        
         $('#actualizando').removeClass('oculto');
@@ -121,10 +134,15 @@ $(document).ready(function () {
         devolver_datos();
     }
 
-    // Función para filtrar los datos en la tabla
+    // Función para filtrar los datos en la tabla, y los cards en dispositivos pequeños
     function filtrar_datos(filtro) {
         if (filtro) {
             $('#eventos-body tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(filtro) > -1);
+            });
+
+            // Filtrar las tarjetas
+            $('#bloque2 .card').filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(filtro) > -1);
             });
         }
@@ -153,7 +171,7 @@ $(document).ready(function () {
     $('#refrescar-btn').click(devolver_datos);
     $('#eliminar-btn').click(eliminar_datos);
     $('#borrar-filtros-btn').click(borrar_filtros);
-    $('#filtrar-btn').click(function() {
+    $('#filtrar-btn').click(function () {
         const filtro = $('#filtroTexto').val().toLowerCase();
         filtrar_datos(filtro); // Pasas el filtro como parámetro a la función filtrar_datos
     });
