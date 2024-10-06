@@ -5,7 +5,7 @@ from funciones import *
 
 def scrap():
     data_json = []
-    #data_json.extend(scrap_musika_zuzenean())
+    data_json.extend(scrap_musika_zuzenean())
     data_json.extend(scrap_prosineck())
     
     return data_json
