@@ -59,11 +59,11 @@ $(document).ready(function () {
                             <td class="oculto">${evento.id}</td>
                             <td>${evento.fecha}</td>
                             <td>${evento.hora ? evento.hora.substring(0, 5) : "-"}</td>                            
+                            <td>${evento.artistas ? evento.artistas : "-"}</td>
                             <td>${evento.lugar ? evento.lugar : "-"}</td>
                             <td>${evento.poblacion ? evento.poblacion : "-"}</td>
                             <td>${evento.provincia ? evento.provincia : "-"}</td>
-                            <td>${evento.tipo ? evento.tipo : "-"}</td>
-                            <td>${evento.artistas ? evento.artistas : "-"}</td>
+                            <td>${evento.tipo ? evento.tipo : "-"}</td>                            
                             <td>${evento.precio ? evento.precio : "-"}</td>                            
                             <td>${evento.web ? evento.web : "-"}</td>                            
                         </tr>
