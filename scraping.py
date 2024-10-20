@@ -5,7 +5,7 @@ from funciones import *
 
 def scrap():
     data_json = []
-    #data_json.extend(scrap_musika_zuzenean())
+    data_json.extend(scrap_musika_zuzenean())
     data_json.extend(scrap_prosineck())
     
     return data_json
@@ -65,8 +65,8 @@ def scrap_musika_zuzenean():
                 pass
             
             hora, precio, detalles = None, None, None
-            if link:
-                hora, precio, detalles = scrap_musika_zuzenean_details(link)            
+            # if link:
+            #     hora, precio, detalles = scrap_musika_zuzenean_details(link)            
                 
             evento = {
                 "fecha": current_date,
