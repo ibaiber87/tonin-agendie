@@ -10,8 +10,8 @@ app = Flask(__name__)
 
 
 #VARIABLES*******************************************************
-SUPABASE_URL = os.getenv("SUPABASE_URL", "https://jqqiawmirueuvcxpdgvf.supabase.co") 
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxcWlhd21pcnVldXZjeHBkZ3ZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQyNTUwNDQsImV4cCI6MjAzOTgzMTA0NH0.zmLSdua3EWJ9hhm8AlJugzLJahVmAOwi00bJdn8g2wY") 
+SUPABASE_URL = os.getenv("SUPABASE_URL", "https://mlyxgrpkdqljnrlozysq.supabase.co") 
+SUPABASE_KEY = os.getenv("SUPABASE_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1seXhncnBrZHFsam5ybG96eXNxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4MjUxMjEsImV4cCI6MjA2NzQwMTEyMX0.AVLKW4_00Z1Tre-yw4kBSzpiaWJJKBnE3DT_u903YJ0") 
 data_json = []
 
 
