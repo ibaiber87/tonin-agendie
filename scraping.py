@@ -65,8 +65,8 @@ def scrap_musika_zuzenean():
                 pass
             
             hora, precio, detalles = None, None, None
-            # if link:
-            #     hora, precio, detalles = scrap_musika_zuzenean_details(link)            
+            if link:
+                hora, precio, detalles = scrap_musika_zuzenean_details(link)            
                 
             evento = {
                 "fecha": current_date,

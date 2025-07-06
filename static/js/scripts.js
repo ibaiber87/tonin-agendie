@@ -8,8 +8,7 @@ $(document).ready(function () {
             const $card = $(`
                 <a href="${evento.link ? evento.link : '#'}" target="_blank" class="text-decoration-none">
                     <div class="card">
-                        <div class="card-body">
-                            <!-- Lógica para determinar qué imagen mostrar según el tipo -->
+                        <div class="card-body">                            
                             <div class="card-image">
                                 <img id="img_card" src=${evento.imagen} class="img-fluid">                                    
                             </div>
@@ -22,10 +21,7 @@ $(document).ready(function () {
                                     <strong>Data:</strong> ${evento.fecha} - ${evento.hora ? evento.hora.substring(0, 5) : ""}<br>
                                     <strong>Herria:</strong> ${evento.poblacion ? evento.poblacion : "-"} ${evento.provincia ? '(' + evento.provincia + ')' : ""}<br>
                                     <strong>Info:</strong> ${evento.web ? evento.web : "-"}<br>
-                                </p>
-                                <!-- Imagen pequeña alineada a la derecha, al par del texto -->
-                                <img src="${evento.tipo === 'Musikie' ? '/static/images/logo_musika.webp' : evento.tipo === 'Antzerkixe' ? '/static/images/logo_antzerki.webp' : evento.tipo === 'zinie' ? '/static/images/logo_cine.webp' : evento.tipo === 'Dantza' ? '/static/images/logo_dantza.webp' : ''}" 
-                                     class="img-small" alt="Evento">                     
+                                </p>                                
                             </div>
                         </div>
                     </div>
@@ -154,10 +150,14 @@ $(document).ready(function () {
 
         if (anchoPantalla < 992) {  // Pantallas medianas y pequeñas
             $('#bloque1').addClass('oculto');
-            $('#bloque2').removeClass('oculto');
+            $('#bloque2').removeClass('oculto');            
+            $('.barra-lateral').addClass('oculto');
+            $('#div_filtros_btn').removeClass('oculto');            
         } else {  // Pantallas grandes
             $('#bloque1').removeClass('oculto');
             $('#bloque2').addClass('oculto');
+            $('.barra-lateral').removeClass('oculto');
+            $('#div_filtros_btn').addClass('oculto');            
         }
     }
 
@@ -165,15 +165,30 @@ $(document).ready(function () {
         $('#divBotones').toggleClass('oculto');
     }
 
+    function toggle_filtros() {
+        //mostrar-ocultar controles de filtro
+        $('.barra-lateral').toggleClass('oculto');
+        
+        //cambiamos el texto del boton        
+        if ($('.barra-lateral').hasClass('oculto')) {
+            $('#filtros_btn').text('Mostrar filtros');
+        } else {
+            $('#filtros_btn').text('Ocultar filtros');
+        }
+        console.log($('#filtros_btn').attr('class'));
+        console.log("qqqq");
+    }
+
     // Asociar eventos de botones
     $('#logo').dblclick(toggle_botones);
+    $('#filtros_btn').click(toggle_filtros);
     $('#actualizar-btn').click(actualizar_bd);
     $('#refrescar-btn').click(devolver_datos);
     $('#eliminar-btn').click(eliminar_datos);
     $('#borrar-filtros-btn').click(borrar_filtros);
     $('#filtrar-btn').click(function () {
         const filtro = $('#filtroTexto').val().toLowerCase();
-        filtrar_datos(filtro); // Pasas el filtro como parámetro a la función filtrar_datos
+        filtrar_datos(filtro);
     });
 
     // Configuración del datepicker

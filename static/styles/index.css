@@ -24,7 +24,7 @@ h5 {
 }
 
 .oculto {
-    display: none;
+    display: none !important;
 }
 
 .container-fluid {
@@ -81,6 +81,11 @@ h5 {
 .btn {
     width: 100%;
     margin-bottom: 10px;
+}
+
+#div_filtros_btn{
+    margin:10px 0 10px 0;
+    
 }
 
 .table {
